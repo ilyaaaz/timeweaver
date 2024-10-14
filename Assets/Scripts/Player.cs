@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Player : MonoBehaviour
 {
     float dx, dy;
@@ -13,11 +12,13 @@ public class Player : MonoBehaviour
 
     [Header("Player Attributes")]
     public float speed;
+    public float deceleration = 5f;
     public float jumpForce;
-    public float pullForce;//pull rope
+    public float pullForce; // Pull rope
 
-    //hook
+    // Hook
     float pullTime;
+    private NPC currentNPC = null; // Track the NPC the player is interacting with
 
     private void Awake()
     {
@@ -43,49 +44,77 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        //left and right
-        dx = Input.GetAxis("Horizontal");
+        float input = Input.GetAxis("Horizontal");
 
-        Vector3 newPosition = transform.position + new Vector3(dx, 0, 0) * speed * Time.deltaTime;
+        // If there's input, update dx (apply acceleration)
+        if (input != 0)
+        {
+            dx = input * speed;
+        }
+        else
+        {
+            // If no input, apply deceleration (reduce dx towards zero)
+            dx = Mathf.MoveTowards(dx, 0, deceleration * Time.deltaTime);
+        }
 
-        //constrains here -- TODO
+        // Move the character by dx
+        Vector3 newPosition = transform.position + new Vector3(dx, 0, 0) * Time.deltaTime;
 
+        // Apply new position
         transform.position = newPosition;
     }
 
     void Jump()
     {
-        //jump
+        // Jump
         if (!isJumping && Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector2.up * jumpForce);
+            // Apply only vertical force for jump
+            rb.velocity = new Vector2(rb.velocity.x, 0);  // Reset the vertical velocity before jumping to avoid stacking forces
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);  // Use Impulse to apply a sudden jump force
         }
+
+        // Ground check
         RaycastHit2D checkJump = Physics2D.Raycast(cld.bounds.center + new Vector3(0, -cld.bounds.extents.y, 0), Vector2.down, 0.1f);
         isJumping = !checkJump.collider;
     }
 
     void TimeTravel()
     {
-        //time
         dy = Input.GetAxis("Vertical");
-
-        //time ability
         GameManager.instance.ChangeAnimationSpeed(dy);
+
+        if (currentNPC != null)
+        {
+            if (dy < 0) // Player is going back in time
+            {
+                currentNPC.GoBackInTime();
+            }
+            else if (dy > 0) // Player is going forward in time
+            {
+                currentNPC.AdvanceInTime();
+            }
+        }
+    }
+
+    public void SetCurrentNPC(NPC npc)
+    {
+        currentNPC = npc;
     }
 
     void ShootHook()
     {
-        //Left Click shoot hook
+        // Left Click shoot hook
         if (Input.GetMouseButtonDown(0))
         {
             if (!GameManager.instance.hookOut)
             {
                 GameManager.instance.currentHook = Instantiate(GameManager.instance.hookPrefab);
                 GameManager.instance.hookOut = true;
-                pullTime = 1f; //reset pull time
+                pullTime = 1f; // Reset pull time
             }
         }
-        else if (Input.GetMouseButtonUp(0))//release
+        else if (Input.GetMouseButtonUp(0)) // Release
         {
             Destroy(GameManager.instance.currentHook);
         }
@@ -93,7 +122,7 @@ public class Player : MonoBehaviour
 
     void DragRope()
     {
-        //right click to drag
+        // Right click to drag
         if (GameManager.instance.currentHook && GameManager.instance.isHooked && Input.GetMouseButton(1))
         {
             pullTime += Time.deltaTime;
