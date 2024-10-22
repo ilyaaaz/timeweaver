@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
 
     [Header("Player Attributes")]
     public float speed;
-    public float deceleration = 5f;
+    //public float maxSpeed;
+    //public float deceleration = 5f;
     public float jumpForce;
     public float pullForce; // Pull rope
 
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        /*
         float input = Input.GetAxis("Horizontal");
 
         // If there's input, update dx (apply acceleration)
@@ -62,6 +64,11 @@ public class Player : MonoBehaviour
 
         // Apply new position
         transform.position = newPosition;
+        */
+
+        dx = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(dx * speed, rb.velocity.y);
+        Debug.Log(dx);
     }
 
     void Jump()
@@ -70,12 +77,12 @@ public class Player : MonoBehaviour
         if (!isJumping && Input.GetKeyDown(KeyCode.Space))
         {
             // Apply only vertical force for jump
-            rb.velocity = new Vector2(rb.velocity.x, 0);  // Reset the vertical velocity before jumping to avoid stacking forces
+            //rb.velocity = new Vector2(rb.velocity.x, 0);  // Reset the vertical velocity before jumping to avoid stacking forces
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);  // Use Impulse to apply a sudden jump force
         }
 
         // Ground check
-        RaycastHit2D checkJump = Physics2D.Raycast(cld.bounds.center + new Vector3(0, -cld.bounds.extents.y, 0), Vector2.down, 0.1f);
+        RaycastHit2D checkJump = Physics2D.BoxCast(cld.bounds.center, cld.bounds.size, 0, Vector2.down, 0.1f);
         isJumping = !checkJump.collider;
     }
 
