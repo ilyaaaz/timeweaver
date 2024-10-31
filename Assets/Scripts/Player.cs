@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,29 +9,39 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     BoxCollider2D cld;
 
-    public bool isJumping;
+    public GameObject effectArea;
 
-    [Header("Player Attributes")]
-    public float speed;
+    //ground Settings
+    public bool isGround;
+    Vector3 leaveGroundPos;
+    bool stopRecordPos;
+
+
+
+    float speed;
     //public float maxSpeed;
     //public float deceleration = 5f;
-    public float jumpForce;
-    public float pullForce; // Pull rope
+    float jumpForce;
+    int health;
+
+    //float pullForce; // Pull rope
 
     // Hook
-    float pullTime;
+    //float pullTime;
     private NPC currentNPC = null; // Track the NPC the player is interacting with
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         cld = GetComponent<BoxCollider2D>();
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        GetAttributesFromManager();
+        ResetAttributes();
     }
 
     // Update is called once per frame
@@ -39,8 +50,70 @@ public class Player : MonoBehaviour
         Move();
         Jump();
         TimeTravel();
-        ShootHook();
-        DragRope();
+        //RecordPosLeaveGround();
+        //ShootHook();
+        //DragRope();
+        CheckHealth();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("111");
+        CollideWithTrap(collision);
+    }
+
+    private void CollideWithTrap(Collision2D other)
+    {
+        if ((GameManager.instance.trapLayer & (1 << other.gameObject.layer)) != 0)
+        {
+            health--;
+            transform.position = leaveGroundPos;
+        } else
+        {
+            if (isGround)
+            {
+                RecordPosLeaveGround();
+            }
+        }
+    }
+
+    void CheckHealth()
+    {
+        if (health <= 0)
+        {
+            //waiting to be implemented
+        }
+    }
+
+    void RecordPosLeaveGround()
+    {
+        /*
+        RaycastHit2D checkGround = Physics2D.Raycast((cld.bounds.center - new Vector3(0, cld.bounds.extents.y, 0)), Vector3.down, 0.1f, GameManager.instance.groundLayer);
+        if (checkGround.collider)
+        {
+            Debug.Log(leaveGroundPos);
+            leaveGroundPos = transform.position;
+        }
+        */
+        leaveGroundPos = transform.position;
+    }
+
+        void SetEffectArea()
+    {
+        effectArea.transform.localScale = Vector3.one * GameManager.instance.effectAreaRadius;
+    }
+    
+    void GetAttributesFromManager()
+    {
+        speed = GameManager.instance.playerSpeed;
+        jumpForce = GameManager.instance.playerJumpForce;
+        SetEffectArea();
+        //pullForce = GameManager.instance.playerPullForce;
+    }
+
+    void ResetAttributes()
+    {
+        health = GameManager.instance.playerHealth;
     }
 
     void Move()
@@ -68,13 +141,12 @@ public class Player : MonoBehaviour
 
         dx = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dx * speed, rb.velocity.y);
-        Debug.Log(dx);
     }
 
     void Jump()
     {
         // Jump
-        if (!isJumping && Input.GetKeyDown(KeyCode.Space))
+        if (isGround && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
         {
             // Apply only vertical force for jump
             //rb.velocity = new Vector2(rb.velocity.x, 0);  // Reset the vertical velocity before jumping to avoid stacking forces
@@ -82,14 +154,18 @@ public class Player : MonoBehaviour
         }
 
         // Ground check
-        RaycastHit2D checkJump = Physics2D.BoxCast(cld.bounds.center, cld.bounds.size, 0, Vector2.down, 0.1f);
-        isJumping = !checkJump.collider;
+        RaycastHit2D checkJump = Physics2D.BoxCast(cld.bounds.center, cld.bounds.size, 0, Vector2.down, 0.1f, GameManager.instance.groundLayer);
+        isGround = checkJump.collider;
     }
 
     void TimeTravel()
     {
-        dy = Input.GetAxis("Vertical");
+
         GameManager.instance.ChangeAnimationSpeed(dy);
+
+        if (Input.GetKeyDown(KeyCode.Space) && !effectArea.activeSelf){
+            StartCoroutine(ShowEffectArea());
+        }
 
         if (currentNPC != null)
         {
@@ -104,11 +180,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    IEnumerator ShowEffectArea()
+    {
+        effectArea.transform.position = transform.position;
+        effectArea.SetActive(true);
+        yield return new WaitForSeconds(GameManager.instance.skillCooldown);
+        effectArea.SetActive(false);
+        GameManager.instance.reversibleObjects.Clear(); //reset reversible objects list
+    }
+
     public void SetCurrentNPC(NPC npc)
     {
         currentNPC = npc;
     }
 
+
+    /*
     void ShootHook()
     {
         // Left Click shoot hook
@@ -138,4 +225,5 @@ public class Player : MonoBehaviour
             rb.AddForce(direction * pullForce * pullTime);
         }
     }
+    */
 }

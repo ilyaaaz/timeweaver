@@ -7,17 +7,36 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [Header("Player")]
+    [Header("Player Settings")]
     public GameObject player;
+    public int playerHealth;
+    public float playerSpeed;
+    public float playerJumpForce;
+
+    [Header("Time Travel Settings")]
+    public float effectAreaRadius;
+    public float skillCooldown;
+    public float reverseTime; //how many seconds of time is reversed
+
+    [Header("Layer Settings")]
+    public LayerMask groundLayer;
+    public LayerMask trapLayer;
+
+    //public float playerPullForce; // Pull rope
+    /*
     public GameObject hookPrefab;
     public GameObject ropePrefab;
     [HideInInspector] public GameObject currentHook;
+    */
 
-    [Header("Hook")]
+    /*
+    [Header("Hook Settings")]
     public bool hookOut;
-    public bool isHooked;
+    public bool isHooked
+    */
 
-    [Header("Animation")]
+    [Header("Animation Settings")]
+    public List<GameObject> reversibleObjects = new List<GameObject>();
     public List<Animator> animators = new List<Animator>();
     
 
@@ -31,22 +50,34 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //check if currentHook exist
         if (!currentHook)
         {
             hookOut = false;
             isHooked = false;
         }
+        */
+    }
+
+    public void ReverseObjects()
+    {
+        for (int i = 0; i < reversibleObjects.Count; i++)
+        {
+
+        }
     }
 
     //set all the default variables
     void InitializeGame()
     {
+        /*
         isHooked = false;
         hookOut = false;
+        */
     }
 
-    public Vector3 getMousePos()
+    public Vector3 GetMousePos()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
@@ -59,7 +90,7 @@ public class GameManager : MonoBehaviour
         
         for (int i = 0; i < animators.Count; i++)
         {
-            if (speed > 0 && !animators[i].GetBool("LastFrame")) // 如果还没有到最后一帧
+            if (speed > 0 && !animators[i].GetBool("LastFrame"))
             {
                 animators[i].SetFloat("Speed", speed);
             }
@@ -71,6 +102,11 @@ public class GameManager : MonoBehaviour
                 animators[i].SetFloat("Speed", 0f);
             }
         }
+
+    }
+
+    public void GameRestart()
+    {
 
     }
 
