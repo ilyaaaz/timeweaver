@@ -449,8 +449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJumping: 0
-  speed: 5
-  jumpForce: 300
+  speed: 10
+  jumpForce: 10
   pullForce: 2
 --- !u!61 &794996173
 BoxCollider2D:

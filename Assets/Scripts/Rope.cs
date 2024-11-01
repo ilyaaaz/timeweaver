@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Rope : MonoBehaviour
 {
+    /*
     GameObject player;
     GameObject hook;
 
@@ -34,5 +35,5 @@ public class Rope : MonoBehaviour
 
     }
 
-
+    */
 }

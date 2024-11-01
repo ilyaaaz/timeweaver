@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hook : MonoBehaviour
 {
+    /*
     public float hookLaunchingSpeed;
     Rigidbody2D rb;
     PolygonCollider2D cld;
@@ -69,4 +70,5 @@ public class Hook : MonoBehaviour
         Destroy(rb);
         GameManager.instance.isHooked = true;
     }
+    */
 }
