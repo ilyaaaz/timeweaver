@@ -7,6 +7,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("Map Settings")]
+    float camHeight = 10f;
+    float camWidth;
+    public Camera cam;
+    //public Vector2 gridSize;
+
+
     [Header("Player Settings")]
     public GameObject player;
     public int playerHealth;
@@ -44,12 +51,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
+        camWidth = camHeight * 2560 / 1440;
         InitializeGame();
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckPlayerOutCam();
         /*
         //check if currentHook exist
         if (!currentHook)
@@ -60,11 +69,31 @@ public class GameManager : MonoBehaviour
         */
     }
 
+    void CheckPlayerOutCam()
+    {
+        if (player.transform.position.x >= cam.transform.position.x + camWidth / 2)
+        {
+            cam.transform.position += new Vector3(camWidth, 0, 0);
+        }
+        else if (player.transform.position.x <= cam.transform.position.x - camWidth / 2)
+        {
+            cam.transform.position -= new Vector3(camWidth, 0, 0);
+        }
+        else if (player.transform.position.y >= cam.transform.position.y + camHeight / 2)
+        {
+            cam.transform.position += new Vector3(0, camHeight, 0);
+        }
+        else if (player.transform.position.y <= cam.transform.position.y - camHeight / 2)
+        {
+            cam.transform.position -= new Vector3(0, camHeight, 0);
+        }
+    }
+
     public void ReverseObjects()
     {
         for (int i = 0; i < reversibleObjects.Count; i++)
         {
-
+            
         }
     }
 

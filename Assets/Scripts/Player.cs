@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
 
 
-    float speed;
+    public float speed;
     //public float maxSpeed;
     //public float deceleration = 5f;
     float jumpForce;
@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("111");
         CollideWithTrap(collision);
     }
 
@@ -138,7 +137,6 @@ public class Player : MonoBehaviour
         // Apply new position
         transform.position = newPosition;
         */
-
         dx = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dx * speed, rb.velocity.y);
     }
