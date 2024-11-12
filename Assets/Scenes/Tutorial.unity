@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 309145483}
   - component: {fileID: 309145485}
   - component: {fileID: 309145484}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy (7)
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -1338,7 +1338,7 @@ GameObject:
   - component: {fileID: 374373747}
   - component: {fileID: 374373749}
   - component: {fileID: 374373748}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy (4)
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -2249,7 +2249,7 @@ GameObject:
   - component: {fileID: 497876577}
   - component: {fileID: 497876579}
   - component: {fileID: 497876578}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy (1)
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -2983,7 +2983,7 @@ GameObject:
   - component: {fileID: 663573694}
   - component: {fileID: 663573696}
   - component: {fileID: 663573695}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -3942,7 +3942,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 867928625}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: DynamicObjects
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -4267,6 +4267,136 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1026529783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1026529784}
+  - component: {fileID: 1026529786}
+  - component: {fileID: 1026529785}
+  m_Layer: 6
+  m_Name: Square (32)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1026529784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026529783}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -49.1012, y: -2.521, z: 0.20017193}
+  m_LocalScale: {x: 1.5398451, y: 1.7560157, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1295519906}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1026529785
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026529783}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!212 &1026529786
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026529783}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1055001123
 GameObject:
   m_ObjectHideFlags: 0
@@ -4440,6 +4570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1128165328}
   - component: {fileID: 1128165329}
+  - component: {fileID: 1128165330}
   m_Layer: 6
   m_Name: Door
   m_TagString: Reversible
@@ -4514,6 +4645,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1128165330
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128165327}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1180154656
 GameObject:
   m_ObjectHideFlags: 0
@@ -4617,7 +4793,7 @@ GameObject:
   - component: {fileID: 1195828239}
   - component: {fileID: 1195828241}
   - component: {fileID: 1195828240}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy (6)
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -4899,6 +5075,7 @@ Transform:
   - {fileID: 306910190}
   - {fileID: 1311319188}
   - {fileID: 498730090}
+  - {fileID: 1026529784}
   - {fileID: 1008494569}
   - {fileID: 1679464351}
   - {fileID: 445517574}
@@ -5413,7 +5590,7 @@ GameObject:
   - component: {fileID: 1552161485}
   - component: {fileID: 1552161487}
   - component: {fileID: 1552161486}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy (8)
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -5686,7 +5863,7 @@ GameObject:
   - component: {fileID: 1598117871}
   - component: {fileID: 1598117873}
   - component: {fileID: 1598117872}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy (3)
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -6349,7 +6526,7 @@ GameObject:
   - component: {fileID: 1795049628}
   - component: {fileID: 1795049630}
   - component: {fileID: 1795049629}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy (5)
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -6739,7 +6916,7 @@ GameObject:
   - component: {fileID: 1840910670}
   - component: {fileID: 1840910672}
   - component: {fileID: 1840910671}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy (2)
   m_TagString: Reversible
   m_Icon: {fileID: 0}
@@ -6977,7 +7154,7 @@ MonoBehaviour:
   playerSpeed: 10
   playerJumpForce: 10
   currentCheckPoint: {fileID: 0}
-  effectAreaRadius: 10
+  effectAreaRadius: 5
   skillCooldown: 1
   reverseTime: 0
   groundLayer:
@@ -7274,7 +7451,7 @@ GameObject:
   - component: {fileID: 1939591629}
   - component: {fileID: 1939591631}
   - component: {fileID: 1939591630}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Enemy (9)
   m_TagString: Reversible
   m_Icon: {fileID: 0}

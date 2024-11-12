@@ -11,7 +11,7 @@ public class CollectObjects : MonoBehaviour
     {
 
         // Check if the object that collided is in the specified layer
-        if ((targetLayer & (1 << other.gameObject.layer)) != 0)
+        if (other.CompareTag("Reversible"))
         {
             Debug.Log(other.gameObject.name);
             GameManager.instance.reversibleObjects.Add(other.gameObject);
