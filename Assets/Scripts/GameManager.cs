@@ -13,12 +13,12 @@ public class GameManager : MonoBehaviour
     public Camera cam;
     //public Vector2 gridSize;
 
-
     [Header("Player Settings")]
     public GameObject player;
     public int playerHealth;
     public float playerSpeed;
     public float playerJumpForce;
+    public GameObject currentCheckPoint;
 
     [Header("Time Travel Settings")]
     public float effectAreaRadius;
@@ -45,12 +45,16 @@ public class GameManager : MonoBehaviour
     [Header("Animation Settings")]
     public List<GameObject> reversibleObjects = new List<GameObject>();
     public List<Animator> animators = new List<Animator>();
-    
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
+
         camWidth = camHeight * 2560 / 1440;
         InitializeGame();
     }
