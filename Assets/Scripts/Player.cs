@@ -57,10 +57,15 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        CollideWithTrap(collision.collider);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         CollideWithTrap(collision);
     }
 
-    private void CollideWithTrap(Collision2D other)
+    private void CollideWithTrap(Collider2D other)
     {
         if ((GameManager.instance.trapLayer & (1 << other.gameObject.layer)) != 0)
         {
