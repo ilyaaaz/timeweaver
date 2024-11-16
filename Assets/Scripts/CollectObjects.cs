@@ -14,10 +14,13 @@ public class CollectObjects : MonoBehaviour
         if (other.CompareTag("Reversible"))
         {
             Debug.Log(other.gameObject.name);
-            GameManager.instance.reversibleObjects.Add(other.gameObject);
+            //GameManager.instance.reversibleObjects.Add(other.gameObject);
+            
+            IReversible reversibleComponent = other.GetComponent<IReversible>();
+            reversibleComponent.ReverseTime();
         }
 
         //call GameManager's function to actually do reverse for these objects;
-        GameManager.instance.ReverseObjects();
+        //GameManager.instance.ReverseObjects();
     }
 }

@@ -95,10 +95,7 @@ public class GameManager : MonoBehaviour
 
     public void ReverseObjects()
     {
-        for (int i = 0; i < reversibleObjects.Count; i++)
-        {
-            
-        }
+        
     }
 
     //set all the default variables
