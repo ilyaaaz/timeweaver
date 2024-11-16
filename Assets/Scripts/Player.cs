@@ -13,12 +13,11 @@ public class Player : MonoBehaviour
 
     //ground Settings
     public bool isGround;
-    Vector3 leaveGroundPos;
     bool stopRecordPos;
 
 
 
-    float speed;
+    public float speed;
     //public float maxSpeed;
     //public float deceleration = 5f;
     float jumpForce;
@@ -58,22 +57,20 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("111");
+        CollideWithTrap(collision.collider);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         CollideWithTrap(collision);
     }
 
-    private void CollideWithTrap(Collision2D other)
+    private void CollideWithTrap(Collider2D other)
     {
         if ((GameManager.instance.trapLayer & (1 << other.gameObject.layer)) != 0)
         {
             health--;
-            transform.position = leaveGroundPos;
-        } else
-        {
-            if (isGround)
-            {
-                RecordPosLeaveGround();
-            }
+            transform.position = GameManager.instance.currentCheckPoint.transform.position - new Vector3(0, GameManager.instance.currentCheckPoint.GetComponent<Collider2D>().bounds.extents.y, 0);
         }
     }
 
@@ -84,20 +81,6 @@ public class Player : MonoBehaviour
             //waiting to be implemented
         }
     }
-
-    void RecordPosLeaveGround()
-    {
-        /*
-        RaycastHit2D checkGround = Physics2D.Raycast((cld.bounds.center - new Vector3(0, cld.bounds.extents.y, 0)), Vector3.down, 0.1f, GameManager.instance.groundLayer);
-        if (checkGround.collider)
-        {
-            Debug.Log(leaveGroundPos);
-            leaveGroundPos = transform.position;
-        }
-        */
-        leaveGroundPos = transform.position;
-    }
-
         void SetEffectArea()
     {
         effectArea.transform.localScale = Vector3.one * GameManager.instance.effectAreaRadius;
@@ -138,7 +121,6 @@ public class Player : MonoBehaviour
         // Apply new position
         transform.position = newPosition;
         */
-
         dx = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dx * speed, rb.velocity.y);
     }
