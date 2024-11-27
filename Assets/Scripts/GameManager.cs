@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask trapLayer;
 
+    [Header("Slime Settings")]
+    public float speed;
+
     //public float playerPullForce; // Pull rope
     /*
     public GameObject hookPrefab;
