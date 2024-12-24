@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public float playerSpeed;
     public float playerJumpForce;
     public GameObject currentCheckPoint;
+    public bool shotPressSkill = false;
+    public bool longPressSkill = false;
 
     [Header("Time Travel Settings")]
     public float effectAreaRadius;
@@ -30,7 +32,7 @@ public class GameManager : MonoBehaviour
     public LayerMask trapLayer;
 
     [Header("Slime Settings")]
-    public float speed;
+    public float slimeSpeed;
 
     //public float playerPullForce; // Pull rope
     /*
